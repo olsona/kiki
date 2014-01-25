@@ -417,14 +417,14 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     int nzi = 0;
     memset(nz, 0, sizeof(int)*dim);
     
+    printf("I got here 3\n");
+    
     for (j = 0; j < dim; j++) {
         if (v[j] > 0) {
             nz[nzi++] = j;
         }
     }
     nz[nzi] = -1;
-    
-    printf("I got here 3\n");
     
     /*
      // Anna's code
