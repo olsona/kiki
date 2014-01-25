@@ -445,9 +445,9 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
             //score += vnorm[j] * db->vectors[i][j];
             score += v[j] * db->vectors[i][j];
         }
-        printf("%d\n", score);
+        printf("%f\n", score);
         scores[i] = score;
-        printf("%d\n", scores[i]);
+        printf("%f\n", scores[i]);
     }
     
 }
