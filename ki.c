@@ -927,6 +927,7 @@ int  kiFarmerRAIphyOriginal() {
       // All scores
       double* scores = (double*)malloc(numDB*sizeof(double));
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
+      printf("Classified!\n");
       for (j=0; j < numDB-1; j++) {
           sprintf(bufTop, "%6.6f,",scores[j]);
           bufTop += strlen(bufTop);
