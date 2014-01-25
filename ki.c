@@ -945,6 +945,7 @@ int  kiFarmerRAIphyOriginal() {
           bufTop += strlen(bufTop);
       }
       sprintf(bufTop, "%6.6f\n", scores[numDB-1]);
+      printf("*Wrote* scores\n");
       
       bufTop += strlen(bufTop);
       if (bufTop-buf > bufSize/2) {
@@ -952,6 +953,7 @@ int  kiFarmerRAIphyOriginal() {
           bufTop = buf;
       }
       free(scores);
+      printf("Actually wrote scores\n");
   }
 
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
