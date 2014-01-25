@@ -941,6 +941,7 @@ int  kiFarmerRAIphyOriginal() {
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
       printf("Classified sequences\n");
       for (j = 0; j < numDB-1; j++){
+          printf("Writing out scores for row %d\n",j);
           sprintf(bufTop, "%6.6f,", scores[j]);
           bufTop += strlen(bufTop);
       }
