@@ -940,7 +940,7 @@ int  kiFarmerRAIphyOriginal() {
       printf("Malloc'd scores\n");
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
       printf("Classified sequences\n");
-      printf("%f\n", scores[j]);
+      printf("%f\n", scores[0]);
       for (j = 0; j < numDB-1; j++){
           printf("Writing out scores for row %d\n",j);
           sprintf(bufTop, "%6.6f,", scores[j]);
