@@ -955,6 +955,7 @@ int  kiFarmerRAIphyOriginal() {
       }
       free(scores);
       printf("Actually wrote scores\n");
+      printf("i was: %d\n",i);
   }
 
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
