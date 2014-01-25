@@ -894,9 +894,22 @@ int  kiFarmerRAIphyOriginal() {
   db = loadDatabase(dbName);
 
   double margin;
-  int i, class;
+    
+    int numDB = db->nClass; //olsona
+    
+    // Top N scores
+    int N = 1;              //olsona
+    int numTrack;           //olsona
+    if (numDB < N)          //olsona
+        numTrack = numDB;   //olsona
+    else                    //olsona
+        numTrack = N;       //olsona
+    
+  //int i, class;
+    int i, j, class;
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
+    /*
     margin = 0.;
     class = classifySequenceOriginal(ki_seqs->seqs[i], db, &margin); 
     sprintf(bufTop, ">%s\n%s\n", ki_seqs->names[i], db->names[class]);
@@ -905,6 +918,35 @@ int  kiFarmerRAIphyOriginal() {
       KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
       bufTop = buf;
     }
+    */
+      /*
+      // Top N scores
+      double* scores = (double*) malloc(numTrack*sizeof(double));
+      int indices[numTrack];
+      classifySequenceTop(ki_seqs->seqs[i], db, numTrack, scores, indices);
+      for (j = 0; j < numTrack; j++) {
+          sprintf(bufTop, "%s %s\n", ki_seqs->names[i], db->names[indices[i]]);
+          //sprintf(bufTop, "%d %d %6.6f\n", i, j, scores[j]);
+          bufTop += strlen(bufTop);
+      }
+      free(scores);
+      */
+      
+      // All scores
+      double* scores = (double*)malloc(numDB*sizeof(double));
+      classifySequenceAll(ki_seqs->seqs[i], db, scores);
+      for (j = 0; j < numDB-1; j++){
+          sprintf(bufTop, "%6.6f,", scores[j]);
+          bufTop += strlen(bufTop);
+      }
+      sprintf(bufTop, "%6.6f\n", scores[numDB-1]);
+      
+      bufTop += strlen(bufTop);
+      if (bufTop-buf > bufSize/2) {
+          KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
+          bufTop = buf;
+      }
+      free(scores);
   }
 
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);

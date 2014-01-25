@@ -381,6 +381,160 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
   return best_index;
 }
 
+void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
+    
+    int k = db->kmerSize;
+    int dim = db->nDim;
+    int mask = dim - 1;
+    int a;
+    
+    int v[dim];
+    
+    memset(v, 0, sizeof(int)*dim);
+    
+    char *p;
+    int i, j, index1, index2;
+    
+    j = 1;
+    index1 = 0;
+    index2 = 0;
+    
+    for (p = seq; *p != '\0'; ++p) {
+        index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
+        index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << 12);
+        
+        if (j < k) { ++j; continue; }
+        
+        v[index1]++;
+        v[index2]++;
+    }
+    
+    int nz[dim];
+    int nzi = 0;
+    memset(nz, 0, sizeof(int)*dim);
+    
+    for (j = 0; j < dim; j++) {
+        if (v[j] > 0) {
+            nz[nzi++] = j;
+        }
+    }
+    nz[nzi] = -1;
+    
+    /*
+     // Anna's code
+     double total = 0.0;
+     double vnorm[dim];
+     for (i=0; i < dim; i++) {
+     if (!isinf((double)v[i]) && !isnan((double)v[i]))
+     total += (double)v[i];
+     }
+     
+     for (i=0; i < dim; i++) {
+     if (!isinf((double)v[i]) && !isnan((double)v[i]))
+     vnorm[i] = ((double)v[i])/total;
+     }
+     // end Anna's code
+     */
+    
+    double score, tempScore;
+    int tempIndex;
+    
+    for (i = 0; i < db->nClass; i++) {
+        score = 0.;
+        for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
+            //score += vnorm[j] * db->vectors[i][j];
+            score += v[j] * db->vectors[i][j];
+        }
+        scores[i] = score;
+    }
+}
+
+
+void classifySequenceTop(char* seq, rai_db_t* db, int num_match, double* scores, int* indices) {
+    
+    int k = db->kmerSize;
+    int dim = db->nDim;
+    int mask = dim - 1;
+    int a;
+    
+    int v[dim];
+    
+    memset(v, 0, sizeof(int)*dim);
+    memset(indices, 0, sizeof(int)*num_match);
+    for (a = 0; a < num_match; a++) {
+        scores[a] = log(0);
+    }
+    
+    char *p;
+    int i, j, index1, index2;
+    
+    j = 1;
+    index1 = 0;
+    index2 = 0;
+    
+    for (p = seq; *p != '\0'; ++p) {
+        index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
+        index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << 12);
+        
+        if (j < k) { ++j; continue; }
+        
+        v[index1]++;
+        v[index2]++;
+    }
+    
+    int nz[dim];
+    int nzi = 0;
+    memset(nz, 0, sizeof(int)*dim);
+    
+    for (j = 0; j < dim; j++) {
+        if (v[j] > 0) {
+            nz[nzi++] = j;
+        }
+    }
+    nz[nzi] = -1;
+    
+    /*
+     // Anna's code
+     double total = 0.0;
+     double vnorm[dim];
+     for (i=0; i < dim; i++) {
+     if (!isinf((double)v[i]) && !isnan((double)v[i]))
+     total += (double)v[i];
+     }
+     
+     for (i=0; i < dim; i++) {
+     if (!isinf((double)v[i]) && !isnan((double)v[i]))
+     vnorm[i] = ((double)v[i])/total;
+     }
+     // end Anna's code
+     */
+    
+    double score, tempScore;
+    int tempIndex;
+    
+    for (i = 0; i < db->nClass; i++) {
+        score = 0.;
+        for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
+            //score += vnorm[j] * db->vectors[i][j];
+            score += v[j] * db->vectors[i][j];
+        }
+        if (score > scores[num_match-1]) {
+            scores[num_match-1] = score;
+            indices[num_match-1] = i;
+            j = num_match-1;
+            while (scores[j] >= scores[j-1] && j >= 1) {
+                tempScore = scores[j];
+                scores[j] = scores[j-1];
+                scores[j-1] = tempScore;
+                tempIndex = indices[j];
+                indices[j] = indices[j-1];
+                indices[j-1] = tempIndex;
+                j--;
+            }
+        }
+    }
+}
+
 
 void kiFreqToRaiVectorOriginal(kmer_freq_t* freq, double* vector) {
   
