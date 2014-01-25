@@ -390,8 +390,6 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     
     int v[dim];
     
-    printf("I got here 1\n");
-    
     memset(v, 0, sizeof(int)*dim);
     
     char *p;
@@ -411,13 +409,9 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         v[index2]++;
     }
     
-    printf("I got here 2\n");
-    
     int nz[dim];
     int nzi = 0;
     memset(nz, 0, sizeof(int)*dim);
-    
-    printf("I got here 3\n");
     
     for (j = 0; j < dim; j++) {
         if (v[j] > 0) {
@@ -452,9 +446,9 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
             score += v[j] * db->vectors[i][j];
         }
         scores[i] = score;
+        printf("%f\n", scores[i]);
     }
     
-    printf("I got here 4\n");
 }
 
 
