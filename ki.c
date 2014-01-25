@@ -926,18 +926,12 @@ int  kiFarmerRAIphyOriginal() {
       
       // All scores
       double* scores = (double*)malloc(numDB*sizeof(double));
-      printf("Malloc'd scores\n");
-      printf("%f\n",scores[0]);
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
-      printf("Classified sequences\n");
-      printf("%f\n", scores[0]);
-      for (j = 0; j < numDB-1; j++){
-      //    printf("Writing out scores for column %d\n",j);
-          sprintf(bufTop, "%6.6f,", scores[j]);
+      for (j=0; j < numDB-1; j++) {
+          sprintf(bufTop, "%6.6f,",scores[j]);
           bufTop += strlen(bufTop);
       }
       sprintf(bufTop, "%6.6f\n", scores[numDB-1]);
-      //printf("*Wrote* scores\n");
       
       bufTop += strlen(bufTop);
       if (bufTop-buf > bufSize/2) {
@@ -945,8 +939,6 @@ int  kiFarmerRAIphyOriginal() {
           bufTop = buf;
       }
       free(scores);
-      //printf("Actually wrote scores\n");
-      printf("i was: %d\n", i);
   }
 
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
