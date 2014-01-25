@@ -893,7 +893,7 @@ int  kiFarmerRAIphyOriginal() {
   rai_db_t* db = NULL;
   db = loadDatabase(dbName);
     
-    printf("Loaded the database\n");
+    //printf("Loaded the database\n");
 
   //double margin;
     
@@ -936,7 +936,7 @@ int  kiFarmerRAIphyOriginal() {
       
       // All scores
       double* scores = (double*)malloc(numDB*sizeof(double));
-      //printf("Malloc'd scores\n");
+      printf("Malloc'd scores\n");
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
       //printf("Classified sequences\n");
       //printf("%f\n", scores[0]);
