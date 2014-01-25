@@ -892,8 +892,10 @@ int  kiFarmerRAIphyOriginal() {
   
   rai_db_t* db = NULL;
   db = loadDatabase(dbName);
+    
+    printf("Loaded the database\n");
 
-  double margin;
+  //double margin;
     
     int numDB = db->nClass; //olsona
     
@@ -933,8 +935,11 @@ int  kiFarmerRAIphyOriginal() {
       */
       
       // All scores
+      
       double* scores = (double*)malloc(numDB*sizeof(double));
+      printf("Malloc'd scores\n")
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
+      printf("Classified sequences\n");
       for (j = 0; j < numDB-1; j++){
           sprintf(bufTop, "%6.6f,", scores[j]);
           bufTop += strlen(bufTop);

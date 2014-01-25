@@ -390,6 +390,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     
     int v[dim];
     
+    printf("I got here 1\n");
+    
     memset(v, 0, sizeof(int)*dim);
     
     char *p;
@@ -409,6 +411,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         v[index2]++;
     }
     
+    printf("I got here 2\n");
+    
     int nz[dim];
     int nzi = 0;
     memset(nz, 0, sizeof(int)*dim);
@@ -419,6 +423,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
     }
     nz[nzi] = -1;
+    
+    printf("I got here 3\n");
     
     /*
      // Anna's code
@@ -447,6 +453,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
         scores[i] = score;
     }
+    
+    printf("I got here 4\n");
 }
 
 
