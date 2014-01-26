@@ -923,7 +923,8 @@ int  kiFarmerRAIphyOriginal() {
       bufTop = buf;
     }
     */
-      
+
+      setbuf(stdout, NULL);
       // All scores
       double* scores = (double*)malloc(numDB*sizeof(double));
       printf("Malloc'd scores\n");
