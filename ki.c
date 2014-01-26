@@ -913,7 +913,7 @@ int  kiFarmerRAIphyOriginal() {
     int i, j, class;
 
 //    double* scores = (double*)malloc(numDB*sizeof(double));
-    double* scores = kimalloc(numDB*sizeof(double));
+    double* scores;// = kimalloc(numDB*sizeof(double));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
     printf("ki_seqs i=%d\n", i);
