@@ -953,10 +953,11 @@ int  kiFarmerRAIphyOriginal() {
           bufTop = buf;
       }
 */
+      free(scores);
  
   }
 
-    free(scores);
+//    free(scores);
     
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
   KI_File_close(&fh);
