@@ -440,18 +440,19 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     int tempIndex;
     
     for (i = 0; i < db->nClass; i++) {
-        printf("%d\n",i);
-        score = 0.;
+        printf("%d start\n",i);
+        score = 0.0;
         for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
             //score += vnorm[j] * db->vectors[i][j];
+            printf("    nzi=%d nz[nzi]=%f j=%f v[j]=%f db->vectors[i][j]=%f\n", nzi, nz[nzi], j, v[j], db->vectors[i][j]);
             score += v[j] * db->vectors[i][j];
         }
-        printf("%f\n", score);
-//        scores[i] = score;
+        printf("  score=%f\n", score);
+        scores[i] = score;
         printf("%f\n", scores[i]);
-        printf("%d\n",i);
+        printf("  %d end\n",i);
     }
-    printf("I got here\n");
+    printf("classifySequenceAll() end\n");
     
 }
 
