@@ -438,6 +438,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     
     double score, tempScore;
     int tempIndex;
+
+    printf("scores %p = %p\n", &scores, scores);
     
     for (i = 0; i < db->nClass; i++) {
         printf("%d start\n",i);
