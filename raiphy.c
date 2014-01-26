@@ -439,23 +439,24 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     double score, tempScore;
     int tempIndex;
 
-    printf("scores %p = %p\n", &scores, scores);
+    printf("    classify start :: scores %p = %p\n", &scores, scores);
     
     for (i = 0; i < db->nClass; i++) {
-        printf("%d start\n",i);
+        printf("      loop %d start\n",i);
         score = 0.0;
         for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
             //score += vnorm[j] * db->vectors[i][j];
             //printf("    nzi=%d  nz[nzi]=%d  j=%d    v[j]=%d db->vectors[i][j]=%f\n", nzi, nz[nzi], j, v[j], db->vectors[i][j]);
             score += v[j] * db->vectors[i][j];
         }
-        printf("  score=%f\n", score);
-        printf("    scores=%p scores[i]=%f\n", scores, scores[i]);
+        printf("        scores %p = %p  ::  scores[i] %p = %f\n", &scores, scores, &(scores[i]), scores[i]);
         //scores[i] = score;
         //printf("%f\n", scores[i]);
-        printf("  %d end\n",i);
+        printf("      loop %d end\n",i);
     }
-    printf("classifySequenceAll() end\n");
+
+    printf("    classify end :: scores %p = %p\n", &scores, scores);
+    
     
 }
 
