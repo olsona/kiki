@@ -381,7 +381,7 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
   return best_index;
 }
 
-double* classifySequenceAll(char* seq, rai_db_t* db, double* scoresold) {
+void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     
     int k = db->kmerSize;
     int dim = db->nDim;
@@ -436,11 +436,11 @@ double* classifySequenceAll(char* seq, rai_db_t* db, double* scoresold) {
      // end Anna's code
      */
     
-    double* scores = kimalloc(db->nClass * sizeof(double));
+    double* scores2 = kimalloc(db->nClass * sizeof(double));
     double score, tempScore;
     int tempIndex;
 
-    printf("    classify start :: scores %p = %p\n", &scores, scores);
+    printf("    classify start :: scores2 %p = %p\n", &scores2, scores2);
     
     for (i = 0; i < db->nClass; i++) {
         printf("      loop %d start\n", i);
@@ -450,15 +450,14 @@ double* classifySequenceAll(char* seq, rai_db_t* db, double* scoresold) {
             //printf("    nzi=%d  nz[nzi]=%d  j=%d    v[j]=%d db->vectors[i][j]=%f\n", nzi, nz[nzi], j, v[j], db->vectors[i][j]);
             score += v[j] * db->vectors[i][j];
         }
-        printf("        scores %p = %p  ::  score = %f  ::  scores[i] = %f\n", &scores, scores, score, scores[i]);
+        printf("        scores2 %p = %p  ::  score = %f  ::  scores[i] = %f\n", &scores2, scores2, score, scores[i]);
         //scores[i] = score;
         //printf("%f\n", scores[i]);
         printf("      loop %d end\n", i);
     }
 
-    printf("    classify end :: scores %p = %p\n", &scores, scores);
+    printf("    classify end :: scores2 %p = %p\n", &scores2, scores2);
     
-    return scores;
 }
 
 
