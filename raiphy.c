@@ -449,8 +449,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
         printf("  score=%f\n", score);
         printf("    scores=%p scores[i]=%d\n", scores, scores[i]);
-        scores[i] = score;
-        printf("%f\n", scores[i]);
+        //scores[i] = score;
+        //printf("%f\n", scores[i]);
         printf("  %d end\n",i);
     }
     printf("classifySequenceAll() end\n");
