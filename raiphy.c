@@ -381,7 +381,7 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
   return best_index;
 }
 
-void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
+double* classifySequenceAll(char* seq, rai_db_t* db) {
     
     int k = db->kmerSize;
     int dim = db->nDim;
@@ -436,6 +436,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
      // end Anna's code
      */
     
+    double* scores = kimalloc(numDB * sizeof(double));
     double score, tempScore;
     int tempIndex;
 
@@ -457,7 +458,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
 
     printf("    classify end :: scores %p = %p\n", &scores, scores);
     
-    
+    return scores;
 }
 
 
