@@ -936,7 +936,7 @@ int  kiFarmerRAIphyOriginal() {
 
 //      printf("  calling classify: scores %p = %p\n", &scores, scores);
       printf("  calling classify\n");
-      double* scores = classifySequenceAll(ki_seqs->seqs[i], db);
+      double* scores = classifySequenceAll(ki_seqs->seqs[i], db, null);
 //      scores = ugh;
       printf("  done with classify: scores %p = %p\n", &scores, scores);
 /*
