@@ -450,8 +450,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
             //printf("    nzi=%d  nz[nzi]=%d  j=%d    v[j]=%d db->vectors[i][j]=%f\n", nzi, nz[nzi], j, v[j], db->vectors[i][j]);
             score += v[j] * db->vectors[i][j];
         }
-        printf("        scores2 %p = %p  ::  score = %f  ::  scores[i] = %f\n", &scores2, scores2, score, scores[i]);
-        //scores[i] = score;
+        scores2[i] = score;
+        printf("        scores2 %p = %p  ::  score = %f  ::  scores2[i] = %f\n", &scores2, scores2, score, scores2[i]);
         //printf("%f\n", scores[i]);
         printf("      loop %d end\n", i);
     }
