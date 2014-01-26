@@ -933,7 +933,7 @@ int  kiFarmerRAIphyOriginal() {
 //      double* scores = (double*)malloc(numDB*sizeof(double));
 
 
-      double* ugh = scores;
+      double* ugh = *scores;
       printf("  calling classify: scores %p = %p\n", &scores, scores);
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
 //      scores = ugh;
