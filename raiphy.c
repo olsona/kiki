@@ -408,7 +408,7 @@ void classifySequenceAll(char* seq, rai_db_t* db) {
         v[index1]++;
         v[index2]++;
     }
-/*
+
     int nz[dim];
     int nzi = 0;
     memset(nz, 0, sizeof(int)*dim);
@@ -419,7 +419,7 @@ void classifySequenceAll(char* seq, rai_db_t* db) {
         }
     }
     nz[nzi] = -1;
-    */
+    
 
     /*
      // Anna's code
