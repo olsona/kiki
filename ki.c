@@ -916,7 +916,7 @@ int  kiFarmerRAIphyOriginal() {
     double* scores;// = kimalloc(numDB*sizeof(double));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
-    printf("ki_seqs i=%d\n", i);
+    printf("ki_seqs %p = %p  ::  ki_seqs->seqs = %p :: i=%d\n", &ki_seqs, ki_seqs, ki_seqs->seqs, i);
 
       /*
     margin = 0.;
