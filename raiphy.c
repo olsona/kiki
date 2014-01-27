@@ -441,7 +441,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     double score, tempScore;
     int tempIndex;
 
-    printf("    classify start :: scores2 %p = %p\n", &scores2, scores2);
+    printf("    classify start :: scores %p = %p\n", &scores, scores);
 /*
     for (i = 0; i < db->nClass; i++) {
         printf("      loop %d start\n", i);
@@ -451,13 +451,13 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
             //printf("    nzi=%d  nz[nzi]=%d  j=%d    v[j]=%d db->vectors[i][j]=%f\n", nzi, nz[nzi], j, v[j], db->vectors[i][j]);
             score += v[j] * db->vectors[i][j];
         }
-        scores2[i] = score;
-        printf("        scores2 %p = %p  ::  score = %f  ::  scores2[i] = %f\n", &scores2, scores2, score, scores2[i]);
+        scores[i] = score;
+        printf("        scores %p = %p  ::  score = %f  ::  scores[i] = %f\n", &scores, scores, score, scores[i]);
         //printf("%f\n", scores[i]);
         printf("      loop %d end\n", i);
     }
 */
-    printf("    classify end :: scores2 %p = %p\n", &scores2, scores2);
+    printf("    classify end :: scores %p = %p\n", &scores, scores);
 
 }
 
