@@ -34,7 +34,7 @@ void      kiPrintRaiDb(FILE* fp, rai_db_t* db);
 rai_db_t* loadDatabase(char* fileName);
 
 int       classifySequenceOriginal(char* seq, rai_db_t* db, double* margin);
-void       classifySequenceAll(char* seq, rai_db_t* db, double* scores);
+void       classifySequenceAll(char* seq, rai_db_t* db);//, double* scores);
 void    classifySequenceTop(char* seq, rai_db_t* db, int num_match, double* scores, int* indices);
 int       classifySequence(char* seq, rai_db_t* db, double* margin);
 

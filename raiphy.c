@@ -381,7 +381,7 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
   return best_index;
 }
 
-void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
+void classifySequenceAll(char* seq, rai_db_t* db) {
 
     int k = db->kmerSize;
     int dim = db->nDim;
