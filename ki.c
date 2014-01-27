@@ -936,7 +936,7 @@ int  kiFarmerRAIphyOriginal() {
 
 //      printf("  calling classify: scores %p = %p\n", &scores, scores);
       printf("  ki_seqs->seqs = %p\n", ki_seqs->seqs);
-      printf("  ki_seqs->seqs[i] = %p\n", ki_seqs->seqs[i]);
+      printf("  ki_seqs->seqs[i] = %s\n", ki_seqs->seqs[i]);
       printf("  db = %p\n", db);
       printf("  scores = %p\n", scores);
       printf("  calling classify: %p, %p, %p\n", ki_seqs->seqs[i], db, scores);
