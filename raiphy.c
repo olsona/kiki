@@ -436,13 +436,13 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
      }
      // end Anna's code
      */
-/*
-    double* scores2 = kimalloc(db->nClass * sizeof(double));
+
+//    double* scores2 = kimalloc(db->nClass * sizeof(double));
     double score, tempScore;
     int tempIndex;
 
     printf("    classify start :: scores2 %p = %p\n", &scores2, scores2);
-    
+/*
     for (i = 0; i < db->nClass; i++) {
         printf("      loop %d start\n", i);
         score = 0.0;
@@ -456,9 +456,9 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         //printf("%f\n", scores[i]);
         printf("      loop %d end\n", i);
     }
-
+*/
     printf("    classify end :: scores2 %p = %p\n", &scores2, scores2);
-    */
+
 }
 
 
