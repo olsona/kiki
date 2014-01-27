@@ -400,6 +400,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     index2 = 0;
 
     for (p = seq; *p != '\0'; ++p) {
+        printf("  seq = %d  ::  p = %d  ::  cur = %d\n", seq, p, (p - seq));
         if ( (p - seq) >= 70 ) { break; }
         
         index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
