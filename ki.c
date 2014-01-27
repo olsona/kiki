@@ -912,8 +912,8 @@ int  kiFarmerRAIphyOriginal() {
   //int i, class;
     int i, j, class;
 
-//    double* scores = (double*)malloc(numDB*sizeof(double));
-    double* scores;// = kimalloc(numDB*sizeof(double));
+    double* scores = (double*)malloc(numDB*sizeof(double));
+//    double* scores;// = kimalloc(numDB*sizeof(double));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
     printf("ki_seqs %p = %p  ::  ki_seqs->seqs = %p :: i=%d\n", &ki_seqs, ki_seqs, ki_seqs->seqs, i);
@@ -941,7 +941,6 @@ int  kiFarmerRAIphyOriginal() {
       printf("  scores = %p\n", scores);
       printf("  calling classify: %p, %p, %p\n", ki_seqs->seqs[i], db, scores);
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
-//      scores = ugh;
       printf("  done with classify\n");
 //      printf("  done with classify: scores %p = %p\n", &scores, scores);
 /*
@@ -961,7 +960,7 @@ int  kiFarmerRAIphyOriginal() {
  
   }
 
-    //free(scores);
+  free(scores);
     
   KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
   KI_File_close(&fh);
