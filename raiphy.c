@@ -382,7 +382,7 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
 }
 
 void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
-
+/*
     int k = db->kmerSize;
     int dim = db->nDim;
     int mask = dim - 1;
@@ -419,7 +419,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
     }
     nz[nzi] = -1;
-    
+    */
+
     /*
      // Anna's code
      double total = 0.0;
