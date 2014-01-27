@@ -453,7 +453,6 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
         scores[i] = score;
         printf("        scores %p = %p  ::  score = %f  ::  scores[i] = %f\n", &scores, scores, score, scores[i]);
-        //printf("%f\n", scores[i]);
         printf("      loop %d end\n", i);
     }
 
