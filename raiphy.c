@@ -382,14 +382,14 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
 }
 
 void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
-/*
+
     int k = db->kmerSize;
     int dim = db->nDim;
     int mask = dim - 1;
     int a;
     
     int v[dim];
-    
+/*
     memset(v, 0, sizeof(int)*dim);
     
     char *p;
@@ -420,10 +420,6 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     }
     nz[nzi] = -1;
     */
-    int i;
-    for (i = 0; i < db->nClass; i++) {
-        printf("      loop %d start\n", i);
-    }
 
     /*
      // Anna's code
