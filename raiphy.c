@@ -399,9 +399,12 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     index1 = 0;
     index2 = 0;
 
-    for (p = seq + 70; *p != '\0'; ++p) {
+    for (p = seq; *p != '\0'; ++p) {
+
+        // If seq is longer than 70, overflow occurs
         printf("  seq = %d  ::  p = %d  ::  cur = %d\n", seq, p, (p - seq));
-        if ( (p - seq) >= 71 ) { break; }
+        if ( (p - seq) >= 70 ) { break; } // Prevents overflow
+        //if ( (p - seq) >= 71 ) { break; } // Causes overflow
         
         index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
         index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << 12);
