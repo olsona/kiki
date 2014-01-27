@@ -420,7 +420,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     }
     nz[nzi] = -1;
     */
-    for (i = 0; i < db->nClass; i++) {
+    for (int i = 0; i < db->nClass; i++) {
         printf("      loop %d start\n", i);
     }
 
