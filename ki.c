@@ -916,7 +916,7 @@ int  kiFarmerRAIphyOriginal() {
 //    double* scores;// = kimalloc(numDB*sizeof(double));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
-    printf("ki_seqs %p = %p  ::  ki_seqs->seqs = %p :: i=%d\n", &ki_seqs, ki_seqs, ki_seqs->seqs, i);
+    //printf("ki_seqs %p = %p  ::  ki_seqs->seqs = %p :: i=%d\n", &ki_seqs, ki_seqs, ki_seqs->seqs, i);
 
       /*
     margin = 0.;
@@ -949,7 +949,7 @@ int  kiFarmerRAIphyOriginal() {
           bufTop += strlen(bufTop);
       }
       sprintf(bufTop, "%6.6f\n", scores[numDB-1]);
-      printf("Written!\n");
+      //printf("Written!\n");
       
       bufTop += strlen(bufTop);
       if (bufTop-buf > bufSize/2) {
