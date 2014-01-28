@@ -935,15 +935,15 @@ int  kiFarmerRAIphyOriginal() {
 
 
 //      printf("  calling classify: scores %p = %p\n", &scores, scores);
-      printf("  ki_seqs->seqs = %p\n", ki_seqs->seqs);
-      printf("  ki_seqs->seqs[i] = %s\n", ki_seqs->seqs[i]);
-      printf("  db = %p\n", db);
-      printf("  scores = %p\n", scores);
-      printf("  calling classify\n");
+//      printf("  ki_seqs->seqs = %p\n", ki_seqs->seqs);
+//      printf("  ki_seqs->seqs[i] = %s\n", ki_seqs->seqs[i]);
+//      printf("  db = %p\n", db);
+//      printf("  scores = %p\n", scores);
+//      printf("  calling classify\n");
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
-      printf("  done with classify\n");
+//      printf("  done with classify\n");
 //      printf("  done with classify: scores %p = %p\n", &scores, scores);
-/*
+
       for (j=0; j < numDB-1; j++) {
           sprintf(bufTop, "%6.6f,",scores[j]);
           bufTop += strlen(bufTop);
@@ -956,7 +956,6 @@ int  kiFarmerRAIphyOriginal() {
           KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
           bufTop = buf;
       }
-*/
  
   }
 
