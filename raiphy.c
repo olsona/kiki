@@ -382,11 +382,11 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
 }
 
 void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
-
+    
     int k = db->kmerSize;
     int dim = db->nDim;
     int mask = dim - 1;
-    int a;
+    int rcshift = (db->kmerSize - 1) * 2;
     
     int v[dim];
 
@@ -402,12 +402,12 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     for (p = seq; *p != '\0'; ++p) {
 
         // If seq is longer than 70, overflow occurs
-        printf("  seq = %d  ::  p = %d  ::  cur = %d\n", seq, p, (p - seq));
-        if ( (p - seq) >= 70 ) { break; } // Prevents overflow
+        //printf("  seq = %d  ::  p = %d  ::  cur = %d\n", seq, p, (p - seq));
+        //if ( (p - seq) >= 70 ) { break; } // Prevents overflow
         //if ( (p - seq) >= 71 ) { break; } // Causes overflow
         
         index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
-        index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << 12);
+        index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << rcshift);
         
         if (j < k) { ++j; continue; }
         
