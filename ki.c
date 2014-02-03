@@ -892,14 +892,11 @@ int  kiFarmerRAIphyOriginal() {
   
   rai_db_t* db = NULL;
   db = loadDatabase(dbName);
-    
-    //printf("Loaded the database\n");
 
   //double margin;
     
     int numDB = db->nClass; //olsona
     
-    /*
     // Top N scores
     int N = 1;              //olsona
     int numTrack;           //olsona
@@ -907,13 +904,11 @@ int  kiFarmerRAIphyOriginal() {
         numTrack = numDB;   //olsona
     else                    //olsona
         numTrack = N;       //olsona
-    */
     
   //int i, class;
     int i, j, class;
 
     double* scores = (double*)malloc(numDB*sizeof(double));
-//    double* scores;// = kimalloc(numDB*sizeof(double));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
     //printf("ki_seqs %p = %p  ::  ki_seqs->seqs = %p :: i=%d\n", &ki_seqs, ki_seqs, ki_seqs->seqs, i);
@@ -928,34 +923,33 @@ int  kiFarmerRAIphyOriginal() {
       bufTop = buf;
     }
     */
-
+      /*
       // All scores
-//      double* scores = (double*)malloc(numDB*sizeof(double));
-
-
-
-//      printf("  calling classify: scores %p = %p\n", &scores, scores);
-//      printf("  ki_seqs->seqs = %p\n", ki_seqs->seqs);
-//      printf("  ki_seqs->seqs[i] = %s\n", ki_seqs->seqs[i]);
-//      printf("  db = %p\n", db);
-//      printf("  scores = %p\n", scores);
-//      printf("  calling classify\n");
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
-//      printf("  done with classify\n");
-//      printf("  done with classify: scores %p = %p\n", &scores, scores);
 
       for (j=0; j < numDB-1; j++) {
           sprintf(bufTop, "%6.6f,",scores[j]);
           bufTop += strlen(bufTop);
       }
       sprintf(bufTop, "%6.6f\n", scores[numDB-1]);
-      //printf("Written!\n");
       
       bufTop += strlen(bufTop);
       if (bufTop-buf > bufSize/2) {
           KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
           bufTop = buf;
       }
+      // End all scores
+      */
+      // Top scores
+      int indices[numTrack];
+      classifySequenceTop(ki_seqs->seqs[i], db, numTrack, scores, indices);
+      
+      for (j = 0; j < numTrack; j++) {
+          sprintf(bufTop, "%s %s\n", ki_seqs->names[i], db->names[indices[j]]);
+          //sprintf(bufTop, "%d %d %6.6f\n", i, j, scores[j]);
+          bufTop += strlen(bufTop);
+      }
+      // End top scores
  
   }
 
