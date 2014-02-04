@@ -896,7 +896,7 @@ int  kiFarmerRAIphyOriginal() {
   //double margin;
     
     int numDB = db->nClass; //olsona
-    /*
+    
     // Top N scores
     int N = 1;              //olsona
     int numTrack;           //olsona
@@ -904,7 +904,8 @@ int  kiFarmerRAIphyOriginal() {
         numTrack = numDB;   //olsona
     else                    //olsona
         numTrack = N;       //olsona
-    */
+    // end top N
+    
     int i, j, class;
 
     double* scores = (double*)malloc(numDB*sizeof(double));
@@ -922,7 +923,7 @@ int  kiFarmerRAIphyOriginal() {
       bufTop = buf;
     }
     */
-      
+      /*
       // All scores
       classifySequenceAll(ki_seqs->seqs[i], db, scores);
 
@@ -938,8 +939,8 @@ int  kiFarmerRAIphyOriginal() {
           bufTop = buf;
       }
       // End all scores
+      */
       
-      /*
       // Top scores
       int indices[numTrack];
       classifySequenceTop(ki_seqs->seqs[i], db, numTrack, scores, indices);
@@ -950,7 +951,6 @@ int  kiFarmerRAIphyOriginal() {
           bufTop += strlen(bufTop);
       }
       // End top scores
-       */
   }
 
   free(scores);
