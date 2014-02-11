@@ -927,10 +927,10 @@ int  kiFarmerRAIphyOriginal() {
     classifySequenceAll(ki_seqs->seqs[i], db, scores);
 
     for (j=0; j < numDB-1; j++) {
-      sprintf(bufTop, "[%6.6f,%d],",scores[j].score, scores[j].index);
+      sprintf(bufTop, "%6.6f:%d, ",scores[j].score, scores[j].index);
       bufTop += strlen(bufTop);
     }
-    sprintf(bufTop, "[%6.6f,%d]\n", scores[j].score, scores[j].index);
+    sprintf(bufTop, "%6.6f:%d\n", scores[j].score, scores[j].index);
       
     bufTop += strlen(bufTop);
     if (bufTop-buf > bufSize/2) {
