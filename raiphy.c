@@ -394,72 +394,70 @@ int comp_score_pairs(const void *p1, const void *p2) {
 }
 
 void classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores) {
+  int k = db->kmerSize;
+  int dim = db->nDim;
+  int mask = dim - 1;
+  int rcshift = (db->kmerSize - 1) * 2;
     
-    int k = db->kmerSize;
-    int dim = db->nDim;
-    int mask = dim - 1;
-    int rcshift = (db->kmerSize - 1) * 2;
-    
-    int v[dim];
+  int v[dim];
 
-    memset(v, 0, sizeof(int)*dim);
+  memset(v, 0, sizeof(int)*dim);
     
-    char *p;
-    int i, j, index1, index2;
+  char *p;
+  int i, j, index1, index2;
     
-    j = 1;
-    index1 = 0;
-    index2 = 0;
+  j = 1;
+  index1 = 0;
+  index2 = 0;
 
-    for (p = seq; *p != '\0'; ++p) {
-        
-        index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
-        index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << rcshift);
+  for (p = seq; *p != '\0'; ++p) {
+    index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
+    index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << rcshift);
       
-        if (j < k) { ++j; continue; }
+    if (j < k) { ++j; continue; }
         
-        v[index1]++;
-        v[index2]++;
-    }
+    v[index1]++;
+    v[index2]++;
+  }
 
-    int nz[dim];
-    int nzi = 0;
-    memset(nz, 0, sizeof(int)*dim);
+  int nz[dim];
+  int nzi = 0;
+  memset(nz, 0, sizeof(int)*dim);
     
-    for (j = 0; j < dim; j++) {
-        if (v[j] > 0) {
-            nz[nzi++] = j;
-        }
+  for (j = 0; j < dim; j++) {
+    if (v[j] > 0) {
+      nz[nzi++] = j;
     }
-    nz[nzi] = -1;
+  }
+  nz[nzi] = -1;
 
-    // Anna's normalization code
-    double total = 0.0;
-    double vnorm[dim];
-    for (i=0; i < dim; i++) {
-      if (!isinf((double)v[i]) && !isnan((double)v[i]))
-        total += (double)v[i];
-    }
+  // Anna's normalization code
+  double total = 0.0;
+  double vnorm[dim];
+  for (i=0; i < dim; i++) {
+    if (!isinf((double)v[i]) && !isnan((double)v[i]))
+      total += (double)v[i];
+  }
      
-    for (i=0; i < dim; i++) {
-      if (!isinf((double)v[i]) && !isnan((double)v[i]))
-        vnorm[i] = ((double)v[i])/total;
-    }
-     // end Anna's code
+  for (i=0; i < dim; i++) {
+    if (!isinf((double)v[i]) && !isnan((double)v[i]))
+      vnorm[i] = ((double)v[i])/total;
+  }
+  // end Anna's code
     
-    double my_score;
+  double my_score;
 
-    for (i = 0; i < db->nClass; i++) {
-        my_score = 0.0;
-        for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
-            my_score += vnorm[j] * db->vectors[i][j];
-        }
-        scores[i]->score = my_score;
-	scores[i]->index = i;
+  for (i = 0; i < db->nClass; i++) {
+    my_score = 0.0;
+    for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
+      my_score += vnorm[j] * db->vectors[i][j];
     }
+    scores[i]->score = my_score;
+    scores[i]->index = i;
+  }
 
-    // sort scores
-    qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
+  // sort scores
+  qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
 }
 
 

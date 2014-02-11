@@ -40,11 +40,11 @@ typedef struct {
 
 int comp_score_pairs(const void *p1, const void *p2);
 
-int       classifySequenceOriginal(char* seq, rai_db_t* db, double* margin);
+int   classifySequenceOriginal(char* seq, rai_db_t* db, double* margin);
 //void       classifySequenceAll(char* seq, rai_db_t* db, double* scores);
-void    classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores);
-void    classifySequenceTop(char* seq, rai_db_t* db, int num_match, double* scores, int* indices);
-int       classifySequence(char* seq, rai_db_t* db, double* margin);
+void  classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores);
+void  classifySequenceTop(char* seq, rai_db_t* db, int num_match, double* scores, int* indices);
+int   classifySequence(char* seq, rai_db_t* db, double* margin);
 
 #endif /* _RAIPHY_H_ */
 
