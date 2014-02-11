@@ -35,7 +35,7 @@ rai_db_t* loadDatabase(char* fileName);
 
 typedef struct {
   double score;
-  double index;
+  int index;
 } score_pair;
 
 int comp_score_pairs(const void *p1, const void *p2);
