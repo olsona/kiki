@@ -7,6 +7,7 @@
 #include <limits.h>
 
 #include "extern.h"
+#include "raiphy.h"
 
 
 /* Packing and unpacking of function args */
@@ -908,7 +909,7 @@ int  kiFarmerRAIphyOriginal() {
     
   int i, j, class;
 
-  double* scores = (score_pair*)malloc(numDB*sizeof(score_pair));
+  score_pair* scores = (score_pair*)malloc(numDB*sizeof(score_pair));
 
   for (i = 0; i < ki_seqs->nSeq; ++i) {
     /*
@@ -926,10 +927,10 @@ int  kiFarmerRAIphyOriginal() {
     classifySequenceAll(ki_seqs->seqs[i], db, scores);
 
     for (j=0; j < numDB-1; j++) {
-      sprintf(bufTop, "[%6.6f,%d],",scores[j]->score, scores[j]->index);
+      sprintf(bufTop, "[%6.6f,%d],",scores[j].score, scores[j].index);
       bufTop += strlen(bufTop);
     }
-    sprintf(bufTop, "[%6.6f,%d]\n", scores[j]->score, scores[j]->index);
+    sprintf(bufTop, "[%6.6f,%d]\n", scores[j].score, scores[j].index);
       
     bufTop += strlen(bufTop);
     if (bufTop-buf > bufSize/2) {

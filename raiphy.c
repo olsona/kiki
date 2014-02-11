@@ -383,8 +383,8 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
 }
 
 int comp_score_pairs(const void *p1, const void *p2) {
-  double s1 = ((struct score_pair *)p1)->score;
-  double s2 = ((struct score_pair *)p2)->score;
+  double s1 = ((score_pair *)p1)->score;
+  double s2 = ((score_pair *)p2)->score;
   if (s1 > s2)
     return -1;
   else if (s2 > s1)
@@ -452,8 +452,8 @@ void classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores) {
     for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
       my_score += vnorm[j] * db->vectors[i][j];
     }
-    scores[i]->score = my_score;
-    scores[i]->index = i;
+    scores[i].score = my_score;
+    scores[i].index = i;
   }
 
   // sort scores
