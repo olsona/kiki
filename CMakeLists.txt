@@ -33,7 +33,8 @@ elseif ($ENV{NDEBUG})
   set(CMAKE_C_FLAGS "-O3 -DNDEBUG")
 
 else ()
-  set(CMAKE_C_FLAGS "-O3")
+  set(CMAKE_C_FLAGS "-g")
+# was -O3, now -g   --AlexS
 
 endif ()
 
