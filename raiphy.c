@@ -457,7 +457,7 @@ void classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores) {
   }
 
   // sort scores
-  qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
+  //qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
 }
 
 
