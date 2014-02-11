@@ -1,5 +1,6 @@
 #include "extern.h"
 #include <math.h>
+#include <stdlib.h>
 
 #include "raiphy.h"
 
@@ -381,7 +382,18 @@ int classifySequenceOriginal(char* seq, rai_db_t* db, double* margin) {
   return best_index;
 }
 
-void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
+int comp_score_pairs(const void *p1, const void *p2) {
+  double s1 = ((struct score_pair *)p1)->score;
+  double s2 = ((struct score_pair *)p2)->score;
+  if (s1 > s2)
+    return -1;
+  else if (s2 > s1)
+    return 1;
+  else
+    return 0;
+}
+
+void classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores) {
     
     int k = db->kmerSize;
     int dim = db->nDim;
@@ -400,15 +412,10 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
     index2 = 0;
 
     for (p = seq; *p != '\0'; ++p) {
-
-        // If seq is longer than 70, overflow occurs
-        //printf("  seq = %d  ::  p = %d  ::  cur = %d\n", seq, p, (p - seq));
-        //if ( (p - seq) >= 70 ) { break; } // Prevents overflow
-        //if ( (p - seq) >= 71 ) { break; } // Causes overflow
         
         index1 <<= 2; index1 |= rai_base2int[(int)*p]; index1 &= mask;
         index2 >>= 2; index2 |= (rai_base2int[base2complement[(int)*p]] << rcshift);
-        
+      
         if (j < k) { ++j; continue; }
         
         v[index1]++;
@@ -425,35 +432,34 @@ void classifySequenceAll(char* seq, rai_db_t* db, double* scores) {
         }
     }
     nz[nzi] = -1;
-    
 
-    
-     // Anna's code
-     double total = 0.0;
-     double vnorm[dim];
-     for (i=0; i < dim; i++) {
-     if (!isinf((double)v[i]) && !isnan((double)v[i]))
-     total += (double)v[i];
-     }
+    // Anna's normalization code
+    double total = 0.0;
+    double vnorm[dim];
+    for (i=0; i < dim; i++) {
+      if (!isinf((double)v[i]) && !isnan((double)v[i]))
+        total += (double)v[i];
+    }
      
-     for (i=0; i < dim; i++) {
-     if (!isinf((double)v[i]) && !isnan((double)v[i]))
-     vnorm[i] = ((double)v[i])/total;
-     }
+    for (i=0; i < dim; i++) {
+      if (!isinf((double)v[i]) && !isnan((double)v[i]))
+        vnorm[i] = ((double)v[i])/total;
+    }
      // end Anna's code
     
-
-    double score, tempScore;
-    int tempIndex;
-
+    double my_score;
 
     for (i = 0; i < db->nClass; i++) {
-        score = 0.0;
+        my_score = 0.0;
         for (nzi = 0; (j = nz[nzi]) >= 0; nzi++) {
-            score += vnorm[j] * db->vectors[i][j];
+            my_score += vnorm[j] * db->vectors[i][j];
         }
-        scores[i] = score;
+        scores[i]->score = my_score;
+	scores[i]->index = i;
     }
+
+    // sort scores
+    qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
 }
 
 

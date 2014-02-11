@@ -33,8 +33,16 @@ void      kiRaiDbAdd(rai_db_t* db, char* name, double* vector);
 void      kiPrintRaiDb(FILE* fp, rai_db_t* db);
 rai_db_t* loadDatabase(char* fileName);
 
+typedef struct {
+  double score;
+  double index;
+} score_pair;
+
+int comp_score_pairs(const void *p1, const void *p2);
+
 int       classifySequenceOriginal(char* seq, rai_db_t* db, double* margin);
-void       classifySequenceAll(char* seq, rai_db_t* db, double* scores);
+//void       classifySequenceAll(char* seq, rai_db_t* db, double* scores);
+void    classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores);
 void    classifySequenceTop(char* seq, rai_db_t* db, int num_match, double* scores, int* indices);
 int       classifySequence(char* seq, rai_db_t* db, double* margin);
 
