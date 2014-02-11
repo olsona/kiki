@@ -454,7 +454,9 @@ void classifySequenceAll(char* seq, rai_db_t* db, score_pair* scores) {
     }
     scores[i].score = my_score;
     scores[i].index = i;
+    printf("%d,",scores[i].index);
   }
+  printf("/n");
 
   // sort scores
   //qsort((void*)scores, db->nClass, sizeof(score_pair), comp_score_pairs);
