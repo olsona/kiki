@@ -911,11 +911,11 @@ int  kiFarmerRAIphyOriginal() {
 
   // for All Scores
   //print out DB names
-  for (i = 0; i < numDB; i++) {
+  for (i = 0; i < numDB-1; i++) {
     sprintf(bufTop, "%s,", db->names[i]);
     bufTop += strlen(bufTop);
   }
-  sprintf(bufTop, "/n");
+  sprintf(bufTop, "%s\n", db->names[i]);
   bufTop += strlen(bufTop);
   if (bufTop-buf > bufSize/2) {
     KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
