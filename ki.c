@@ -911,27 +911,31 @@ int  kiFarmerRAIphyOriginal() {
 
   // for All Scores
   //print out DB names
-  for (i = 0); i < numDb-1; i++) {
+  for (i = 0); i < numDB-1; i++) {
     sprintf(bufTop, "%s,", db->names[i]);
     if (bufTop-buf > bufSize/2) {
       KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
       bufTop = buf;
+    }
   }
   sprintf(bufTop, "%s\n", db->names[i]);
   if (bufTop-buf > bufSize/2) {
     KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
     bufTop = buf;
+  }
   // print out contig names
   for (i = 0; i < ki_seqs->nSeq; i++) {
     sprintf(bufTop, "%s,", ki_seqs->names[i]);
     if (bufTop-buf > bufSize/2) {
       KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
       bufTop = buf;
+    }
   }
   sprintf(bufTop, "%s\n", ki_seqs->names[i]);
   if (bufTop-buf > bufSize/2) {
     KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
     bufTop = buf;
+  }
   // end printout for allScores
     
     
