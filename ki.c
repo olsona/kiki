@@ -913,6 +913,7 @@ int  kiFarmerRAIphyOriginal() {
   //print out DB names
   for (i = 0; i < numDB; i++) {
     sprintf(bufTop, "%s,", db->names[i]);
+    bufTop += strlen(bufTop);
   }
   sprintf(bufTop, "/n");
   bufTop += strlen(bufTop);
