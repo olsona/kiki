@@ -15,7 +15,6 @@ void kiFreqToRaiVectorOriginal(kmer_freq_t* freq, double* vector);
 
 void kiFreqToRaiVector(kmer_freq_t* freq, double* vector);
 
-
 typedef struct {
   int nameLen;
   int kmerSize;
