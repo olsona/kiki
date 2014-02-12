@@ -921,6 +921,17 @@ int  kiFarmerRAIphyOriginal() {
     KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
     bufTop = buf;
   }
+  //print out contig names
+  for (i = 0; i < ki_seqs->nSeq-1; i++) {
+    sprintf(bufTop, "%s,", ki_seqs->names[i]);
+    bufTop += strlen(bufTop);
+  }
+  sprintf(bufTop, "%s\n", ki_seqs->names[i]);
+  bufTop += strlen(bufTop);
+  if (bufTop-buf > bufSize/2) {
+    KI_File_write_shared(fh, buf, bufTop-buf, MPI_CHAR, &status, &elements);
+    bufTop = buf;
+  }
   // end printout for allScores
     
     
